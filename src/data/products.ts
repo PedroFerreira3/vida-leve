@@ -392,12 +392,19 @@ function getKitUnits(value: string) {
   return match ? Number(match[1]) : undefined;
 }
 
+function getProductWhatsAppMessage(productName: string, baseName: string, kitUnits?: number) {
+  const interestName = kitUnits ? `Kit com ${kitUnits} unidades de ${baseName}` : productName;
+
+  return `Olá, tenho interesse no ${interestName} da Vida Leve.`;
+}
+
 function makeProducts(groups: ProductGroup[]): Product[] {
   let currentOrder = 10;
 
   return groups.flatMap((group, groupIndex) =>
     group.variants.map((variant, variantIndex) => {
       const detailContent = productDetailContentByGroupId[group.id] ?? {};
+      const kitUnits = variant.kitUnits ?? getKitUnits(variant.name);
       const product: Product = {
         id: variant.id,
         slug: makeSlug(variant.name),
@@ -410,7 +417,7 @@ function makeProducts(groups: ProductGroup[]): Product[] {
         benefitTagIds: group.benefitTagIds,
         format: group.format,
         quantityLabel: group.quantityLabel,
-        kitUnits: variant.kitUnits ?? getKitUnits(variant.name),
+        kitUnits,
         priceCents: variant.priceCents,
         originalPriceCents: variant.originalPriceCents,
         salesRank: groupIndex * 10 + variantIndex + 1,
@@ -418,7 +425,7 @@ function makeProducts(groups: ProductGroup[]): Product[] {
         usageInstructions: group.usageInstructions ?? detailContent.usageInstructions,
         compositionSections: group.compositionSections ?? detailContent.compositionSections,
         nutritionImage: group.nutritionImage,
-        whatsappMessage: `Olá, tenho interesse no ${variant.name} da Vida Leve.`,
+        whatsappMessage: getProductWhatsAppMessage(variant.name, group.baseName, kitUnits),
         featured: variant.featured,
         active: true,
         sortOrder: currentOrder,
@@ -527,6 +534,7 @@ const productGroups: ProductGroup[] = [
         image: "/imagens-produtos/ostd5/ostd5.png",
         originalPriceCents: 39990,
         priceCents: 34990,
+        featured: true,
       },
       {
         id: "ostd5-kit-3",
