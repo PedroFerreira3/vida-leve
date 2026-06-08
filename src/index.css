@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-leaf-50: #f6f9ee;
+  --color-leaf-100: #e7efd4;
+  --color-leaf-200: #cfe0aa;
+  --color-leaf-300: #aac66f;
+  --color-leaf-400: #82a944;
+  --color-leaf-500: #618c2d;
+  --color-leaf-600: #477020;
+  --color-leaf-700: #36571c;
+  --color-leaf-800: #2c461b;
+  --color-leaf-900: #243b19;
+  --color-earth-50: #faf7ef;
+  --color-earth-100: #f1e8d1;
+  --color-earth-500: #ba8c42;
+  --color-clay-500: #b6694f;
+  --color-mint-500: #5fae7d;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: #243b19;
+  background: #fffdf8;
+  font-family: var(--font-sans);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+button:disabled,
+a[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+::selection {
+  color: #fffdf8;
+  background: #477020;
+}
